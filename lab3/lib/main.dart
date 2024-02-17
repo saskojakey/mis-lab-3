@@ -7,10 +7,13 @@ import 'package:lab3/logging.dart';
 import 'package:provider/provider.dart';
 import 'foptions.dart';
 import 'authentication.dart';
+import 'package:lab3/calendar_widget.dart';
+import 'package:lab3/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+  await NotificationService().init();
   runApp(ExamApp());
 }
 
@@ -64,7 +67,14 @@ class ExamHomePage extends StatelessWidget {
     final authService = Provider.of<AuthService>(context);
     return Scaffold(
       appBar: AppAppBar(authService: authService),
-      body: ExamPage(),
+      body: Column(
+        children: [
+          CalendarWidget(),
+          Expanded(
+            child: ExamPage(),
+          ),
+        ],
+      ),
     );
   }
 }
