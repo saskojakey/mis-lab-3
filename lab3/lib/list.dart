@@ -95,6 +95,8 @@ class ExamPage extends StatelessWidget {
           subject: examData['name'],
           date: examData['date'],
           time: examData['time'],
+          latitude: examData['latitude'],
+          longitude: examData['longitude'],
         );
       }).toList(),
     );

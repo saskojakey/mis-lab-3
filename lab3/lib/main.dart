@@ -9,6 +9,7 @@ import 'foptions.dart';
 import 'authentication.dart';
 import 'package:lab3/calendar_widget.dart';
 import 'package:lab3/notification_service.dart';
+import 'package:lab3/map_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -90,7 +91,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text('MIS2023/24 app'),
+      title: const Text('MIS2023/24 app'),
       actions: [
         IconButton(
           icon: Icon(Icons.add),
@@ -105,6 +106,17 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: Icon(Icons.logout),
           onPressed: () async {
             await authService.signOut();
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.map),
+          onPressed: () async {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MapScreen(),
+              ),
+            );
           },
         ),
       ],

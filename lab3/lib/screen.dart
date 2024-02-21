@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // lab 4
 import 'package:intl/intl.dart';
 import 'package:lab3/notification_service.dart';
+import 'package:geolocator/geolocator.dart';
 
 class AddExamPage extends StatefulWidget {
   const AddExamPage({Key? key}) : super(key: key);
@@ -16,6 +17,23 @@ class _AddExamPageState extends State<AddExamPage> {
   final TextEditingController nameController = TextEditingController();
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
+  double? currentLatitude;
+  double? currentLongitude;
+
+  Future<void> _getLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      setState(() {
+        currentLatitude = position.latitude;
+        currentLongitude = position.longitude;
+      });
+    } catch (e) {
+      print('An error occurred: $e');
+    }
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -146,6 +164,8 @@ class _AddExamPageState extends State<AddExamPage> {
           'name': name,
           'date': date,
           'time': time,
+          'latitude': currentLatitude,
+          'longitude': currentLongitude
         });
         date = date.replaceAllMapped(
           RegExp(r'(\d+)-(\d+)-(\d+)'),

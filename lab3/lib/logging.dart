@@ -21,7 +21,7 @@ class AuthenticationHomePage extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           _buildSignInButton(context),
           const SizedBox(height: 16.0),
